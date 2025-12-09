@@ -79,7 +79,7 @@ Ikuti langkah-langkah berikut untuk menjalankan aplikasi sepenuhnya menggunakan 
 Salin kode sumber proyek ke komputer lokal Anda.
 
 ```bash
-git clone <repository-url-anda>
+git clone https://github.com/gathacom/Employee-Management-System-FSE-Intern.git
 cd employee-management-system
 ```
 
@@ -228,4 +228,4 @@ Jika diberikan waktu pengembangan lebih lanjut, fitur-fitur berikut akan ditamba
 4.  **Unit & Integration Testing:** Menambahkan pengujian otomatis menggunakan Jest (Backend) dan Vitest (Frontend) untuk menjamin stabilitas kode.
 
 ---
-**Dibuat oleh [Nama Anda] - 2025**
+**Dibuat oleh [Yoga Agatha Pasaribu] - 2025**
