@@ -80,7 +80,8 @@ Salin kode sumber proyek ke komputer lokal Anda.
 
 ```bash
 git clone https://github.com/gathacom/Employee-Management-System-FSE-Intern.git
-cd employee-management-system
+cd employee-management-system-fse-intern
+
 ```
 
 ### 2. Konfigurasi Environment Variables
@@ -193,15 +194,23 @@ Berikut adalah tampilan antarmuka aplikasi yang telah dibangun:
 
 | **Dashboard View** | **Employee List** |
 | :---: | :---: |
-| ![Dashboard](screenshots/dashboard.jpeg) | ![List](screenshots/dashboard.jpeg) |
+| ![Dashboard](screenshots/dashboard.jpeg) | ![List](screenshots/list.jpeg) |
 | *Visualisasi Data Statistik* | *Tabel Data dengan Search & Filter* |
 
 | **Employee Detail** | **Add/Edit Form** |
 | :---: | :---: |
-| ![Detail](screenshots/dashboard.jpeg) | ![Form](screenshots/dashboard.jpeg) |
+| ![Detail](screenshots/detail.jpeg) | ![Form](screenshots/add-form.jpeg) |
 | *Detail Profil & Aksi* | *Formulir Validasi* |
 
+| **Dashboard Mobile View** | **Side Navbar** |
+| :---: | :---: |
+| ![Mobile](screenshots/dashboard-mobile.jpeg) | ![Side Navbar](screenshots/sidenav.jpeg) |
+| *Visual Dashboard Mobile* | *Side Navbar Pada Mobile* |
 
+| **Dokumentasi API** |
+| :---: |
+| ![API Docs](screenshots/swagger.jpeg) |
+| *Dokumentasi API dengan Swagger* |
 ## 💡 Tantangan & Solusi (Challenges & Solutions)
 
 Selama proses pengembangan, terdapat beberapa tantangan teknis yang dihadapi dan berhasil diselesaikan:
@@ -228,4 +237,4 @@ Jika diberikan waktu pengembangan lebih lanjut, fitur-fitur berikut akan ditamba
 4.  **Unit & Integration Testing:** Menambahkan pengujian otomatis menggunakan Jest (Backend) dan Vitest (Frontend) untuk menjamin stabilitas kode.
 
 ---
-**Dibuat oleh [Yoga Agatha Pasaribu] - 2025**
+**Dibuat oleh Yoga Agatha Pasaribu - 2025**
