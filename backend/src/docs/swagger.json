@@ -1,0 +1,172 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Employee Management System API",
+    "description": "API Documentation for FSE Internship Test Case",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Developer"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000/api",
+      "description": "Local Development Server"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Employee": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer", "example": 1 },
+          "name": { "type": "string", "example": "Budi Santoso" },
+          "email": { "type": "string", "format": "email", "example": "budi@example.com" },
+          "position": { "type": "string", "example": "Backend Engineer" },
+          "department": { "type": "string", "example": "Technology" },
+          "salary": { "type": "integer", "example": 15000000 },
+          "hire_date": { "type": "string", "format": "date", "example": "2024-01-20" },
+          "status": { "type": "string", "enum": ["active", "inactive"], "example": "active" }
+        }
+      },
+      "EmployeeInput": {
+        "type": "object",
+        "required": ["name", "email", "position", "department", "salary", "hire_date"],
+        "properties": {
+          "name": { "type": "string", "minLength": 3 },
+          "email": { "type": "string", "format": "email" },
+          "position": { "type": "string", "minLength": 2 },
+          "department": { "type": "string", "minLength": 2 },
+          "salary": { "type": "integer", "minimum": 1 },
+          "hire_date": { "type": "string", "format": "date", "description": "Format: YYYY-MM-DD" }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "message": { "type": "string" },
+          "data": { "type": "object", "nullable": true }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/health": {
+      "get": {
+        "summary": "Check API Health",
+        "responses": {
+          "200": {
+            "description": "API is running",
+            "content": {
+              "application/json": {
+                "schema": { "type": "object", "properties": { "message": { "type": "string" } } }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/employees/stats": {
+      "get": {
+        "summary": "Get Dashboard Statistics",
+        "tags": ["Dashboard"],
+        "responses": {
+          "200": {
+            "description": "Statistics retrieved successfully"
+          }
+        }
+      }
+    },
+    "/employees": {
+      "get": {
+        "summary": "Get All Employees",
+        "tags": ["Employees"],
+        "parameters": [
+          { "in": "query", "name": "page", "schema": { "type": "integer", "default": 1 } },
+          { "in": "query", "name": "limit", "schema": { "type": "integer", "default": 10 } },
+          { "in": "query", "name": "department", "schema": { "type": "string" }, "description": "Filter by department" },
+          { "in": "query", "name": "status", "schema": { "type": "string", "enum": ["active", "inactive"] } }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of employees",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": { "type": "string" },
+                    "data": { "type": "array", "items": { "$ref": "#/components/schemas/Employee" } },
+                    "pagination": { "type": "object" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create New Employee",
+        "tags": ["Employees"],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EmployeeInput" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Employee created successfully"
+          },
+          "400": { "description": "Validation Error" },
+          "409": { "description": "Email already exists" }
+        }
+      }
+    },
+    "/employees/{id}": {
+      "get": {
+        "summary": "Get Employee By ID",
+        "tags": ["Employees"],
+        "parameters": [
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Employee details retrieved" },
+          "404": { "description": "Employee not found" }
+        }
+      },
+      "put": {
+        "summary": "Update Employee",
+        "tags": ["Employees"],
+        "parameters": [
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/EmployeeInput" }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "Employee updated successfully" },
+          "404": { "description": "Employee not found" }
+        }
+      },
+      "delete": {
+        "summary": "Soft Delete Employee",
+        "tags": ["Employees"],
+        "parameters": [
+          { "in": "path", "name": "id", "required": true, "schema": { "type": "integer" } }
+        ],
+        "responses": {
+          "200": { "description": "Employee deactivated successfully" },
+          "404": { "description": "Employee not found" }
+        }
+      }
+    }
+  }
+}
